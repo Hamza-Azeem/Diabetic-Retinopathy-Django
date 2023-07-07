@@ -1,0 +1,19 @@
+{% extends "retinoscope/base.html" %}
+{% load static %}
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if empty == 0 %}
+            <h2> Your history is empty!</h2>
+        {% else %}
+            {% for history in history_list %}
+                <ul>
+                    <li><h5> Date: {{ history.date }}</h5></li>
+                    <br>
+                    <li><h5> Result: {{ history.result }}</h5></li>
+                    <br>
+                    <br>
+                </ul>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

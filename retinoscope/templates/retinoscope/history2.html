@@ -1,0 +1,118 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>WebPage</title>
+  <link href="{% static 'retinoscope/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'retinoscope/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'retinoscope/profile3.css' %}" rel="stylesheet">
+</head>
+
+<body id="section_1">
+  <nav class="navbar navbar-expand-lg bshadow-lg  ">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'retinoscope/media/logo.png' %}" class="logo img-fluid" alt="RetinaScope">
+        <span>
+          RetinaScope
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'index' %}">Home</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'profile' pk=request.user.pk %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'logout' %}">Sign Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'signup' %}">Sign Up</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'login' %}">Sign In</a>
+          </li>
+          {% endif %}
+          <!-- 
+              <li class="nav-item">
+                  <a class="nav-link click-scroll" href="#section_4">About</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link click-scroll" href="#section_5">Contact Us</a>
+              </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section class="vh-100" ;>
+    <div class="container py-6 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-300">
+        <div class="col col-lg-12 mb-10 mb-lg-0">
+          <div class="row g-0">
+            <div class="col-lg-12 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="{% static 'retinoscope/media/avatar2.png' %}" alt="Avatar"
+                class="img-fluid my-5" style="width: 80px;" />
+              <h5>Welcome,</h5>
+              <p>{{ user.first_name }} {{ user.last_name }}</p>
+              <i class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-lg-12">
+              <div class="card-body p-4">
+                <h6>History</h6>
+                <hr class="mt-0 mb-4">
+                {% if user.is_authenticated %}
+                {% if empty == 0 %}
+                <h2> Your history is empty!</h2>
+                {% else %}
+                {% for history in history_list %}
+                <div class="row pt-1">
+                  <div class="col-12 mb-3">
+                    <h6>Result:</h6>
+                    {% if history.result == class0 %}
+                    <p class="text-muted">Stage: {{ history.result }} - Normal </p>
+                    {% elif history.result == class1 %}
+                    <p class="text-muted">Stage: {{ history.result }} - Mild Nonproliferative </p>
+                    {% elif history.result == class2 %}
+                    <p class="text-muted">Stage: {{ history.result }} - Moderate Nonproliferative </p>
+                    {% elif history.result == class3 %}
+                    <p class="text-muted">Stage: {{ history.result }} - Severe Nonproliferative </p>
+                    {% else %}
+                    <p class="text-muted">Stage: {{ history.result }} - Proliferative Diabetic Retinopathy </p>
+                    {% endif %}
+                  </div>
+                  <div class="col-12 mb-3">
+                    <h6>Date:</h6>
+                    <p class="text-muted">{{ history.date }}</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-4">
+                {% endfor %}
+                {% endif %}
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'retinoscope/style.css' %}" />
+    <title>SignIn</title>
+  </head>
+    <body>
+    <div class="container">
+      <div class="big-wrapper light">
+        <header>
+          <div class="containerbar">
+            <a href="{% url 'index' %}"><div class="logo">
+              <img src="{% static 'retinoscope/media/logo.png' %}" alt="Logo" />
+              <h3>RetinaScope</h3>
+            </div> </a>
+            <div class="links">
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'profile' pk=request.user.pk %}">Profile</a></li>
+              <li><a href="{% url 'logout' %}">Sign Out</a></li>
+              {% else %}
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+              <li><a href="{% url 'login' %}">Sign In</a></li>
+              {% endif %}
+              
+
+            </ul>
+          </div>
+      </div>
+        </header>
+		
+  {% block content %}
+  {% endblock %}
+    </body>
+</html>

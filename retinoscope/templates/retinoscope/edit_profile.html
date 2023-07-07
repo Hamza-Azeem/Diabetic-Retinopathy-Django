@@ -1,0 +1,38 @@
+{% extends "retinoscope/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="forms-container">
+  <div class="signin-signup">
+    <form class="sign-in-form" id="login" onclick="toggleInput1()" method="post">
+      {% csrf_token %}
+      <h2 class="title">Edit Information</h2>
+      {% if error_msg %}
+      <div> <strong style="color:red"> {{ error_msg }}</strong></div>
+      {% endif %}
+      <div class="input-field">
+        <i class="fas fa-user"></i>
+        <input maxlength="100" name="first_name" placeholder="First Name" type="text" class="input" value='{{ user.first_name }}'required>
+      </div>
+     <div class="input-field">
+        <i class="fas fa-user"></i>
+        <input maxlength="100" name="last_name" placeholder="Last Name" type="text" class="input" value='{{ user.last_name }}' required>
+      </div>
+      <div class="input-field">
+        <i class="fas fa-phone"></i>
+        <input maxlength="100" name="mobile_number" placeholder="Mobile Number" type="number" class="input" value='{{ user.account.mobile_number }}' required>
+      </div>
+      <div class="input-field">
+        <i class="fas fa-child"></i>
+        <input maxlength="100" name="age" placeholder="age" type="number" class="input" value='{{ user.account.age }}' required>
+      </div>
+      <input type="submit" value="EDIT" class="btn solid" name="choice">
+      <div class="social-media">
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}

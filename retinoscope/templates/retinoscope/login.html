@@ -1,0 +1,39 @@
+{% extends "retinoscope/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="forms-container">
+  <div class="signin-signup">
+    <form class="sign-in-form" id="login" onclick="toggleInput1()" method="post">
+      {% csrf_token %}
+      <h2 class="title">Sign in</h2>
+      {% if error_msg %}
+      <div> <strong style="color:red"> {{ error_msg }}</strong></div>
+      {% endif %}
+      {% for error in form.non_field_errors %}
+      <div> <strong style="color:red"> {{ error }}</strong></div>
+      {% endfor %}
+      <div class="input-field">
+        <i class="fas fa-user"></i>
+        <input id="{{ form.username.id_for_label }}" maxlength="100" name="{{ form.username.html_name }}" placeholder="Username" type="text" class="input" required>
+      </div>
+     <div class="input-field">
+        <i class="fas fa-lock"></i>
+        <input id="{{ form.password.id_for_label }}" maxlength="100" name="{{ form.password.html_name }}" placeholder="Password" type="password" class="input" required>
+      </div>
+      <input type="submit" value="signin" class="btn solid" name="choice">
+      <a href="{% url 'password_reset' %}"> Forgot Password?</a>
+      <div class="social-media">
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<div class="panels-container">
+  <div class="panel left-panel">
+    <img src="{% static 'retinoscope/media/login.png' %}" alt="hhhh" class="image" />
+  </div>
+</div>
+
+
+{% endblock %}

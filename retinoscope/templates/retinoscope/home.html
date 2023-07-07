@@ -1,0 +1,334 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>WebPage</title>
+      
+        <link href="{% static 'retinoscope/bootstrap.min.css' %}" rel="stylesheet">
+
+        <link href="{% static 'retinoscope/bootstrap-icons.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'retinoscope/home.css' %}" >
+
+
+    </head>
+    
+    <body id="section_1">
+        {% if msg %}
+        <div> <strong style="color:lightgreen"> {{ msg }} </strong></div>
+        {% endif %}
+        {% for msg in messages %}
+            {{msg}}
+        {% endfor %}
+        <nav class="navbar navbar-expand-lg bshadow-lg fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'retinoscope/media/logo.png' %}" class="logo img-fluid" alt="RetinaScope">
+                    <span>
+                        RetinaScope
+                    </span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_1">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{% url 'profile' pk=request.user.pk %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{% url 'logout' %}">Sign Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="{% url 'login' %}#">Sign In</a>
+                        </li>
+                        {% endif %}
+                        
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_4">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_5">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+
+            <section class="hero-section hero-section-full-height">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12 p-0">
+                            <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{% static 'retinoscope/media/home1.jpg' %}" class="carousel-image img-fluid" alt="...">
+                                        
+                                        <div class="carousel-caption d-flex flex-column justify-content-end">
+                                            <h1>RetinaScope</h1>
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item">
+                                        <img src="{% static 'retinoscope/media/home2.jpg' %}" class="carousel-image img-fluid" alt="...">
+                                        
+                                        <div class="carousel-caption d-flex flex-column justify-content-end">
+                                            <h1>Join us now!</h1>
+                                            
+                                            <p>Detect your stage from home.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+
+                                <button class="carousel-control-next" type="button" data-bs-target="#hero-slide" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <div class="platform">
+                    <br> <br><br><br><br><br> <br>
+
+                    <section class="section-padding">
+                        <div class="container">
+                            <div class="row">
+        
+                                <div class="col-lg-10 col-12 text-center mx-auto">
+                                    <h2 class="mb-5">Welcome to RetinaScope</h2>
+                                </div>
+        
+                                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <div class="featured-block d-flex justify-content-center align-items-center">
+                                        <a href="{% url 'signup' %}" class="d-block">
+                                            <img src="{% static 'retinoscope/media/signup_home.jpg' %}" class="featured-block-image img-fluid" alt="">
+                                            <br>
+        
+                                            <p class="featured-block-text">Sign-Up for free</p>
+                                        </a>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
+                                    <div class="featured-block d-flex justify-content-center align-items-center">
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'classify' pk=request.user.pk %}" class="d-block">
+                                            <img src="{% static 'retinoscope/media/AI_home.jpg' %}" class="featured-block-image img-fluid" alt="">
+                                            <br><br>
+                                            <p class="featured-block-text">Detect Diabetic Retinopathy</p>
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}" class="d-block">
+                                            <img src="{% static 'retinoscope/media/AI_home.jpg' %}" class="featured-block-image img-fluid" alt="">
+                                            <br><br>
+                                            <p class="featured-block-text">Detect Diabetic Retinopathy</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
+                                    <div class="featured-block d-flex justify-content-center align-items-center">
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'history' pk=request.user.pk %}" class="d-block">
+                                            <img src="{% static 'retinoscope/media/keep_track.jpg' %}" class="featured-block-image img-fluid" alt="">
+        
+                                            <p class="featured-block-text">Keep track of your case</p>
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}" class="d-block">
+                                            <img src="{% static 'retinoscope/media/keep_track.jpg' %}" class="featured-block-image img-fluid" alt="">
+        
+                                            <p class="featured-block-text">Keep track of your case</p>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                        <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                            <div class="featured-block d-flex justify-content-center align-items-center">
+                                <a href="#section_5" class="d-block">
+                                    <img src="{% static 'retinoscope/media/researcher.jpg' %}" class="featured-block-image img-fluid" alt="">
+                                    <br>
+<br>
+                                    <p class="featured-block-text">Research support</p>
+                                </a>
+                            </div>
+                        </div>
+              
+            </div>
+            <br><br><br><br><br><br><br><br>
+
+
+
+
+
+            <section class="about-section section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-5 col-md-5 col-12">
+                            
+                            <img src="{% static 'retinoscope/media/home_first_block.jpg' %}" class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                        </div>
+
+                        <div class="col-lg-7 col-md-7 col-12">
+                            <div class="custom-text-block">
+                                <h2 class="mb-0">Artificial Intelligence Impact</h2>
+
+    <br><br>
+
+                               <p class="textt">Diabetic retinopathy can lead to blindness if left untreated so one of the main challenges is early detection, which is crucial for successful treatment.Ophthalmologists manually analyze the fundus retinal images however, they may not always produce correct findings since even the best specialized and professional ophthalmologist may not be able to follow subtle changes in eye structure and can't detect the early stages of the disease easily 
+                                also it is a very time consuming process. Therefore, automated detection for DR is necessary to solve this problem where computer-based methods and detection systems appear to offer a promising solution to support the ophthalmologists.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <br><br><br><br><br><br><br><br><br><br><br><br>     
+            <section class="section-padding section-bg" id="section_4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                            <img src="{% static 'retinoscope/media/home_second_block.jpg' %}" class="custom-text-box-image img-fluid" alt="">
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="custom-text-box">
+                                <h2 class="mb-2">About RetinaScoope</h2>
+
+                                <h5 class="mb-3"></h5>
+
+                                <p class="mb-0">We are a cutting-edge online platform dedicated to diabetic retinopathy detection. Our mission is to provide an accessible and reliable solution for early diagnosis and monitoring of this vision-threatening complication caused by diabetes. With the aim of reducing the risk of vision loss, our advanced technology combines the power of machine learning and medical expertise to analyze retinal images and detect signs of retinopathy.  Through our user-friendly interface, individuals can conveniently upload their retinal images. The results are promptly generated and shared with users.  At RetinaScope, we strive to make retinopathy detection efficient,  and accessible to all. Join our community today and experience the benefits of early detection and intervention in preserving your vision.</p>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="custom-text-box mb-lg-0">
+                                        <h5 class="mb-3">RetinaScoope Mission</h5>
+                                        <p>RetinaScoope mission is to provide a user-friendly website that enables early detection of diabetic retinopathy.</p>
+                                    </div>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <section class="contactus-section section-padding" id="section_5">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12">
+                            <h2 class="text-white mb-4">Research Support</h2>
+
+                            <form class="custom-form contactus-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                                <h3 class="mb-4">Dear Researcher,</h3>
+                               <p class="text"> We are delighted that you are interested in utilizing our data for your research purposes. We understand the significance of data-driven research and are committed to supporting the scientific community.
+                                For inquiries related to data access, please don't hesitate to reach out to us. We are here to assist you throughout the process and provide the necessary information and resources to ensure a smooth and productive collaboration. 
+                                                   <br>We appreciate your interest in our data and look forward to supporting your research endeavors. Together, we can contribute to advancing knowledge and making meaningful discoveries.
+                                                   Thank you for considering us as a valuable resource for your research needs</p></form>
+                                   
+
+                                     
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="contactustwo-section section-padding  ">
+                <div class="containerpage">
+                    <div class="row">
+
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h2 class="mb-lg-3">Contact Us</h2>
+                                <div id="contactustwo-carousel" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                           <div class="carousel-caption">
+                                                <h4 class="carousel-title">+20-01006369857</h4>
+
+                                                <small class="carousel-name"><span class="carousel-name-title">Phone Number</small>
+                                           </div>
+                                        </div>
+
+                                        
+                                        <div class="carousel-item">
+                                            <div class="carousel-caption">
+                                                <h4 class="carousel-title">RetinaScope1@gmail.com</h4>
+
+                                                <small class="carousel-name"><span class="carousel-name-title"> Email</small>
+                                            </div>
+                                        </div>
+
+
+                                          <ul class="carousel-indicators">
+                                               <li data-bs-target="#contactustwo-carousel" data-bs-slide-to="0" class="active">
+                                                    <img src="{% static 'retinoscope/media/number_button.jpg' %}" class="img-fluid rounded-circle avatar-image" alt="avatar">
+                                               </li>
+                                               <li data-bs-target="#contactustwo-carousel" data-bs-slide-to="1" class="">
+                                                    <img src="{% static 'retinoscope/media/mail_button.jpg' %}" class="img-fluid rounded-circle avatar-image" alt="avatar">
+                                               </li>
+
+                                            </ul>
+
+                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+        </main>
+    
+        <script src="{% static 'retinoscope/bootstrap.min.js' %}"></script>
+        <script src="{% static 'retinoscope/jquery.sticky.js' %}"></script>
+        <script src="{% static 'retinoscope/click-scroll.js' %}"></script>
+        <script src="{% static 'retinoscope/counter.js' %}"></script>
+        <script src="{% static 'retinoscope/custom.js' %}"></script>
+
+    </body></html>
